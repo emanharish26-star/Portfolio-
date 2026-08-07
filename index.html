@@ -9,18 +9,17 @@
         :root {  
             --bg-base: #020617;  
             --card-bg: rgba(15, 23, 42, 0.75);  
-            --card-border-light: rgba(255, 255, 255, 0.12);
+            --card-border-light: rgba(255, 255, 255, 0.15);
             --text-main: #f8fafc;  
             --text-muted: #94a3b8;  
             --accent-blue: #38bdf8;  
             --accent-gradient: linear-gradient(135deg, #38bdf8, #818cf8);
-            --border-color: rgba(56, 189, 248, 0.25);  
+            --border-color: rgba(56, 189, 248, 0.3);  
             --nav-bg: rgba(11, 17, 32, 0.85);  
-            --glow-color: rgba(56, 189, 248, 0.35);  
-            --shadow-soft: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 35px rgba(56, 189, 248, 0.15);
-            --glass-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            --glow-color: rgba(56, 189, 248, 0.25);  
+            --shadow-soft: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            --glass-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.2);
             --noise-opacity: 0.01;
-            --shine-color: rgba(255, 255, 255, 0.15);
         }  
 
         * {  
@@ -55,8 +54,8 @@
             z-index: 0; pointer-events: none;  
         }  
 
-        .sphere-1 { width: 500px; height: 500px; background: var(--glow-color); top: -150px; left: -150px; }  
-        .sphere-2 { width: 600px; height: 600px; background: rgba(99, 102, 241, 0.2); bottom: -200px; right: -150px; animation-delay: -7s; animation-direction: alternate-reverse; }  
+        .sphere-1 { width: 500px; height: 500px; background: rgba(56, 189, 248, 0.35); top: -150px; left: -150px; }  
+        .sphere-2 { width: 600px; height: 600px; background: rgba(99, 102, 241, 0.25); bottom: -200px; right: -150px; animation-delay: -7s; animation-direction: alternate-reverse; }  
 
         @keyframes pulseOrb {  
             0% { transform: scale(1) translate(0, 0) rotate(0deg); opacity: 0.6; }  
@@ -77,7 +76,7 @@
             font-size: 3rem; font-weight: 800; letter-spacing: -1px;  
             background: var(--accent-gradient);  
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;  
-            margin-bottom: 12px; filter: drop-shadow(0 10px 25px var(--glow-color));  
+            margin-bottom: 12px; filter: drop-shadow(0 10px 25px rgba(56, 189, 248, 0.4));  
             animation: textReveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             opacity: 0; transform: translateY(30px);
         }  
@@ -108,7 +107,7 @@
             transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        .profile-card { padding: 24px; margin-bottom: 28px; position: relative; }  
+        .profile-card { padding: 24px; margin-bottom: 28px; position: relative; overflow: visible !important; }  
         
         .profile-header { 
             display: flex; align-items: center; gap: 16px; position: relative; 
@@ -119,7 +118,7 @@
         .profile-pic {  
             width: 72px; height: 72px; border-radius: 20px; object-fit: cover;  
             padding: 3px; background: var(--accent-gradient);
-            box-shadow: 0 10px 30px var(--glow-color);  
+            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.3);  
             animation: float 6s ease-in-out infinite;
         }  
         
@@ -139,7 +138,7 @@
             font-size: 0.72rem; font-weight: 700; color: #fff;  
             background: var(--accent-gradient); padding: 5px 14px;  
             border-radius: 20px; display: inline-flex; align-items: center; margin-top: 6px;  
-            box-shadow: 0 8px 22px var(--glow-color);  
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.25);  
             position: relative; overflow: hidden;
         }  
         .role-badge::after {
@@ -155,15 +154,15 @@
             width: 44px; height: 44px; border-radius: 14px; cursor: pointer;  
             display: flex; justify-content: center; align-items: center;   
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);  
-            box-shadow: 0 8px 25px var(--glow-color), var(--glass-highlight); backdrop-filter: blur(10px);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.3), var(--glass-highlight); backdrop-filter: blur(10px);
         }  
         .expand-btn:hover { 
-            transform: scale(1.15); box-shadow: 0 12px 30px var(--glow-color); 
+            transform: scale(1.15); box-shadow: 0 10px 30px rgba(56, 189, 248, 0.4); 
         }  
         .profile-card.expanded .expand-btn svg { transform: rotate(180deg); }  
           
-        .profile-details { max-height: 0; overflow: hidden; opacity: 0; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); }  
-        .profile-card.expanded .profile-details { max-height: 800px; opacity: 1; margin-top: 24px; }  
+        .profile-details { max-height: 0; overflow: visible; opacity: 0; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); }  
+        .profile-card.expanded .profile-details { max-height: 900px; opacity: 1; margin-top: 24px; padding-bottom: 8px; }  
 
         .labels-container { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }  
         .label-chip {  
@@ -185,29 +184,29 @@
 
         .profile-bottom-row {
             display: flex; align-items: center; justify-content: space-between;
-            gap: 12px; padding-top: 6px; flex-wrap: wrap;
+            gap: 12px; padding: 12px 4px 4px 4px; flex-wrap: wrap;
         }
 
-        .social-links-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+        .social-links-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
         .social-icon {
             color: var(--text-muted); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             display: inline-flex; justify-content: center; align-items: center;
-            width: 38px; height: 38px; border-radius: 12px;
-            background: rgba(56, 189, 248, 0.05); border: 1px solid var(--border-color);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+            width: 42px; height: 42px; border-radius: 14px;
+            background: rgba(56, 189, 248, 0.04); border: 1px solid var(--border-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.1);
         }
-        .social-icon:hover { color: #fff; transform: translateY(-3px) scale(1.1); background: var(--accent-gradient); border-color: transparent; box-shadow: 0 8px 22px var(--glow-color); }
+        .social-icon:hover { color: #fff; transform: translateY(-3px) scale(1.08); background: var(--accent-gradient); border-color: transparent; box-shadow: 0 10px 25px rgba(56, 189, 248, 0.3); }
         .social-icon svg { width: 18px; height: 18px; }
 
         .resume-btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 10px 22px; background: var(--accent-gradient); color: #fff;
-            border: none; border-radius: 50px; font-size: 0.8rem; font-weight: 800;
-            text-decoration: none; cursor: pointer; box-shadow: 0 8px 25px var(--glow-color), var(--glass-highlight);
+            padding: 12px 24px; background: var(--accent-gradient); color: #fff;
+            border: none; border-radius: 50px; font-size: 0.85rem; font-weight: 800;
+            text-decoration: none; cursor: pointer; box-shadow: 0 8px 25px rgba(56, 189, 248, 0.25), var(--glass-highlight);
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); white-space: nowrap;
         }
-        .resume-btn svg { width: 15px; height: 15px; transition: transform 0.3s ease; }
-        .resume-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 12px 30px var(--glow-color); }
+        .resume-btn svg { width: 16px; height: 16px; transition: transform 0.3s ease; }
+        .resume-btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 12px 30px rgba(56, 189, 248, 0.4); }
 
         .status-center-container {
             display: flex; justify-content: center; align-items: center; margin-bottom: 20px; width: 100%;
@@ -263,11 +262,11 @@
             text-align: center; cursor: pointer; border-radius: 24px; position: relative; overflow: hidden;
             transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
         }  
-        .skill-card:hover { border-color: var(--accent-blue); transform: translateY(-3px); box-shadow: 0 20px 40px -10px var(--glow-color); }  
+        .skill-card:hover { border-color: var(--accent-blue); transform: translateY(-3px); box-shadow: 0 20px 40px -10px rgba(56, 189, 248, 0.2); }  
         .skill-card.expanded { 
             grid-column: span 2; border-color: var(--accent-blue); 
             background: linear-gradient(180deg, var(--card-bg), rgba(56, 189, 248, 0.12));
-            box-shadow: 0 30px 60px -10px var(--glow-color); 
+            box-shadow: 0 30px 60px -10px rgba(56, 189, 248, 0.25); 
         }  
 
         .skill-card-main { display: flex; flex-direction: column; align-items: center; width: 100%; justify-content: space-between; }  
@@ -281,7 +280,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
         }  
         .skill-card.expanded .skill-icon-box { margin-bottom: 0; }
-        .skill-card:hover .skill-icon-box { background: var(--accent-gradient); color: #fff; box-shadow: 0 8px 25px var(--glow-color); border-color: transparent; }  
+        .skill-card:hover .skill-icon-box { background: var(--accent-gradient); color: #fff; box-shadow: 0 8px 25px rgba(56, 189, 248, 0.3); border-color: transparent; }  
 
         .skill-name { font-size: 0.95rem; font-weight: 800; color: var(--text-main); margin-bottom: 6px; }  
           
@@ -319,7 +318,7 @@
         }
         .sub-skill-tag:hover { 
             transform: translateY(-3px) scale(1.05); background: var(--accent-gradient); 
-            border-color: transparent; box-shadow: 0 8px 22px var(--glow-color);
+            border-color: transparent; box-shadow: 0 8px 22px rgba(56, 189, 248, 0.3);
         }  
         .sub-skill-tag:hover span { color: #fff; }
         .sub-skill-tag:hover img, .sub-skill-tag:hover svg { filter: brightness(0) invert(1); stroke: #fff; }
@@ -344,7 +343,7 @@
         }  
         .nav-item svg { width: 16px; height: 16px; flex-shrink: 0; }
         .nav-item:hover { color: var(--text-main); background: rgba(56, 189, 248, 0.1); }  
-        .nav-item.active { background: var(--accent-gradient); color: #fff; font-weight: 800; box-shadow: 0 6px 20px var(--glow-color); }  
+        .nav-item.active { background: var(--accent-gradient); color: #fff; font-weight: 800; box-shadow: 0 6px 20px rgba(56, 189, 248, 0.3); }  
 
         @media (min-width: 1024px) {
             #app {
@@ -829,4 +828,3 @@
 </script>
 </body>  
 </html>
-
