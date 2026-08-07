@@ -1,5 +1,5 @@
 <!DOCTYPE html>  
-<html lang="en" data-theme="light">  
+<html lang="en" data-theme="dark">  
 <head>  
     <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
@@ -26,20 +26,20 @@
 
         [data-theme="dark"] {  
             --bg-base: #020617;  
-            --card-bg: rgba(15, 23, 42, 0.4);  
-            --card-border-light: rgba(255, 255, 255, 0.05);
+            --card-bg: rgba(15, 23, 42, 0.55);  
+            --card-border-light: rgba(255, 255, 255, 0.08);
             --text-main: #f8fafc;  
             --text-muted: #94a3b8;  
             --accent-blue: #38bdf8;  
             --accent-gradient: linear-gradient(135deg, #38bdf8, #818cf8);
             --accent-indigo: #818cf8;  
-            --border-color: rgba(56, 189, 248, 0.15);  
-            --nav-bg: rgba(11, 17, 32, 0.65);  
+            --border-color: rgba(56, 189, 248, 0.18);  
+            --nav-bg: rgba(11, 17, 32, 0.75);  
             --glow-color: rgba(56, 189, 248, 0.25);  
             --shadow-soft: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
             --glass-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.1);
             --noise-opacity: 0.06;
-            --shine-color: rgba(255, 255, 255, 0.1);
+            --shine-color: rgba(255, 255, 255, 0.12);
         }  
 
         * {  
@@ -274,6 +274,75 @@
             height: 22px;
         }
 
+        /* --- Status Bar & Resume Button Header Container --- */
+        .status-resume-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        /* --- Open to Opportunities Pill --- */
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-main);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            backdrop-filter: blur(10px);
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #22c55e;
+            animation: pulseDot 2s infinite;
+        }
+        @keyframes pulseDot {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+
+        /* --- Download Resume Button --- */
+        .resume-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 18px;
+            background: var(--accent-gradient);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 6px 20px var(--glow-color);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            white-space: nowrap;
+        }
+        .resume-btn svg {
+            width: 15px;
+            height: 15px;
+            transition: transform 0.3s ease;
+        }
+        .resume-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 10px 25px var(--glow-color);
+        }
+        .resume-btn:hover svg {
+            transform: translateY(2px);
+        }
+
         /* --- Content Sections & Box Touch Animations --- */  
         .section { display: none; opacity: 0; }  
         .section.active { display: block; animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }  
@@ -307,7 +376,6 @@
             transform: skewX(-20deg); z-index: -1;
             transition: left 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         }  
-        /* The Touch/Hover state */
         .card:hover, .card:active { 
             transform: scale(0.98) translateY(-2px); 
             box-shadow: 0 15px 30px -10px var(--glow-color); 
@@ -346,7 +414,7 @@
             grid-column: span 2; border-color: var(--accent-blue); 
             background: linear-gradient(180deg, var(--card-bg), var(--glow-color));
             box-shadow: 0 30px 60px -10px var(--glow-color); 
-            transform: scale(1); /* Return to full size when expanded */
+            transform: scale(1);
         }  
 
         .skill-card-main { display: flex; flex-direction: column; align-items: center; width: 100%; position: relative; z-index: 1; }  
@@ -376,19 +444,42 @@
         .chevron { transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }  
         .skill-card.expanded .chevron { transform: rotate(180deg); }  
 
-        .skill-details-dropdown { max-height: 0; opacity: 0; overflow: hidden; width: 100%; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); position: relative; z-index: 1; }  
-        .skill-card.expanded .skill-details-dropdown { max-height: 250px; opacity: 1; margin-top: 20px; padding-top: 20px; border-top: 1px dashed var(--border-color); }  
+        /* --- Image Based Skill Tags (The New Grid) --- */
+        .skill-details-dropdown { 
+            max-height: 0; opacity: 0; overflow: hidden; width: 100%; 
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); position: relative; z-index: 1; 
+        }  
+        .skill-card.expanded .skill-details-dropdown { 
+            max-height: 350px; opacity: 1; margin-top: 24px; padding-top: 24px; 
+            border-top: 1px dashed var(--border-color); 
+        }  
 
-        .sub-skills-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; list-style: none; }  
+        .sub-skills-list { 
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; list-style: none; 
+        }  
         .sub-skill-tag {  
-            font-size: 0.8rem; font-weight: 700; color: var(--text-main);  
-            background: var(--card-bg); border: 1px solid var(--border-color);  
-            padding: 8px 16px; border-radius: 14px; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);  
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+            width: 76px; height: 76px; background: var(--card-bg); border: 1px solid var(--border-color);  
+            border-radius: 20px; transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);  
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
         }  
+        .sub-skill-tag img, .sub-skill-tag svg {
+            width: 32px; height: 32px; object-fit: contain; 
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            color: var(--text-main); stroke: var(--text-main);
+        }
+        .sub-skill-tag span {
+            font-size: 0.65rem; font-weight: 800; color: var(--text-main); 
+            text-transform: uppercase; letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
         .sub-skill-tag:hover { 
-            transform: translateY(-4px) scale(1.05); background: var(--accent-gradient); 
-            color: #fff; border-color: transparent; box-shadow: 0 8px 20px var(--glow-color); 
+            transform: translateY(-5px) scale(1.05); background: var(--accent-gradient); 
+            border-color: transparent; box-shadow: 0 12px 25px var(--glow-color); 
         }  
+        .sub-skill-tag:hover span { color: #fff; }
+        .sub-skill-tag:hover img, .sub-skill-tag:hover svg { transform: scale(1.15); }
+        .sub-skill-tag:hover svg { color: #fff; stroke: #fff; }
 
         /* --- Floating Bottom Nav --- */  
         .bottom-nav-container {  
@@ -435,7 +526,6 @@
             .intro-title { font-size: 5.5rem; }
             .intro-subtitle { font-size: 1.25rem; letter-spacing: 6px; }
 
-            /* Desktop Profile Sidebar */
             .profile-card {
                 position: sticky;
                 top: 80px;
@@ -457,7 +547,6 @@
             .profile-info h2 { font-size: 1.8rem; }
             .role-badge { font-size: 0.95rem; padding: 8px 24px; }
 
-            /* Force expanded details on desktop */
             .expand-btn { display: none !important; }
             .profile-details {
                 max-height: 800px !important;
@@ -468,7 +557,6 @@
             .labels-container, .detail-item, .social-links-row { justify-content: center; }
             .detail-text { text-align: left; }
 
-            /* Grid & Content Scaling */
             .card { padding: 36px; }
             .section-header { font-size: 1.1rem; margin-bottom: 24px; }
             .text-content { font-size: 1.05rem; }
@@ -476,7 +564,6 @@
             .skill-card { padding: 32px 24px; }
         }
 
-        /* Tablet bridging adjustments */
         @media (min-width: 768px) and (max-width: 1023px) {
             #app { max-width: 760px; padding: 60px 30px; }
             .intro-title { font-size: 4.5rem; }
@@ -492,7 +579,15 @@
 <!-- Theme Toggle Button -->  
 <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Theme">  
     <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">  
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
     </svg>  
 </button>  
 
@@ -537,9 +632,9 @@
               
             <!-- Labels -->  
             <div class="labels-container">  
-                <span class="label-chip">✨ 6+ Certifications</span>  
-                <span class="label-chip">🚀 3+ Workshops</span>  
-                <span class="label-chip">🏆 3+ Hackathons</span>  
+                <span class="label-chip">6+ Certifications</span>  
+                <span class="label-chip">3+ Workshops</span>  
+                <span class="label-chip">3+ Hackathons</span>  
             </div>  
 
             <div style="height: 1px; background: linear-gradient(90deg, transparent, var(--border-color), transparent); margin: 20px 0;"></div>  
@@ -555,7 +650,7 @@
                 </div>  
             </div>  
 
-            <!-- Social Links (Reference matching) -->
+            <!-- Social Links -->
             <div style="height: 1px; background: linear-gradient(90deg, transparent, var(--border-color), transparent); margin: 20px 0;"></div>
             <div class="social-links-row">
                 <a href="https://linkedin.com/in/emanharish" target="_blank" class="social-icon" aria-label="LinkedIn">
@@ -564,17 +659,14 @@
                 <a href="#" target="_blank" class="social-icon" aria-label="Instagram">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                 </a>
-                <a href="#" target="_blank" class="social-icon" aria-label="Facebook">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
-                </a>
-                <a href="#" target="_blank" class="social-icon" aria-label="X">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
-                </a>
                 <a href="https://github.com/emanharish" target="_blank" class="social-icon" aria-label="GitHub">
                     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                 </a>
-                <a href="#" target="_blank" class="social-icon" aria-label="Resume">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/><rect x="8" y="14" width="8" height="2"/><rect x="8" y="10" width="8" height="2"/></svg>
+                <a href="mailto:emanharish@example.com" target="_blank" class="social-icon" aria-label="Email">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </a>
+                <a href="#" target="_blank" class="social-icon" aria-label="Google Drive">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.01 1.49L5.89 12.16H18.13L12.01 1.49zM5.018 13.668L-.004 22.508h12.242l5.122-8.84H5.018zm13.964 0l-5.122 8.84h6.126l6.018-10.422h-12.242z"/></svg>
                 </a>
             </div>
         </div>  
@@ -584,6 +676,18 @@
     <main id="main-content">  
           
         <section id="about" class="section active">  
+            <!-- Open to Opportunities & Download Resume Header Bar -->
+            <div class="status-resume-container">
+                <div class="status-pill">
+                    <span class="status-dot"></span>
+                    <span>Open to Opportunities</span>
+                </div>
+                <a href="#" download class="resume-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    <span>Resume</span>
+                </a>
+            </div>
+
             <h3 class="section-header">About me</h3>  
             <div class="glass-panel card">  
                 <p class="text-content">  
@@ -602,7 +706,7 @@
         </section>  
 
         <section id="academic" class="section">  
-            <h3 class="section-header">Academic</h3>  
+            <h3 class="section-header">Education</h3>  
             <div class="glass-panel card">  
                 <h4 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 6px; color: var(--text-main);">B.Tech AI & Data Science <span style="font-weight: 500; font-size: 1rem; color: var(--text-muted)">(3rd Year)</span></h4>  
                 <span style="font-size: 0.85rem; color: var(--accent-blue); font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">J.P. College of Engineering</span>  
@@ -616,13 +720,14 @@
             <h3 class="section-header">Skills Set</h3>  
             <div class="skills-grid">  
                   
+                <!-- Skill Card 1 -->
                 <div class="glass-panel skill-card" onclick="toggleSkill(this)">  
                     <div class="skill-card-main">  
                         <div class="skill-icon-box">  
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>  
                         </div>  
                         <div>
-                            <div class="skill-name">Python & ML</div>  
+                            <div class="skill-name">Programming</div>  
                             <div class="skill-level">  
                                 Advanced   
                                 <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"></polyline></svg>  
@@ -631,21 +736,34 @@
                     </div>  
                     <div class="skill-details-dropdown">  
                         <ul class="sub-skills-list">  
-                            <li class="sub-skill-tag">Python</li>  
-                            <li class="sub-skill-tag">Pandas</li>  
-                            <li class="sub-skill-tag">TensorFlow</li>  
-                            <li class="sub-skill-tag">Scikit-Learn</li>  
+                            <li class="sub-skill-tag">  
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python">  
+                                <span>Python</span>  
+                            </li>  
+                            <li class="sub-skill-tag">  
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg" alt="C">  
+                                <span>C</span>  
+                            </li>  
+                            <li class="sub-skill-tag">  
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" alt="C++">  
+                                <span>C++</span>  
+                            </li>  
+                            <li class="sub-skill-tag">  
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="Java">  
+                                <span>Java</span>  
+                            </li>  
                         </ul>  
                     </div>  
                 </div>  
 
+                <!-- Skill Card 2 -->
                 <div class="glass-panel skill-card" onclick="toggleSkill(this)">  
                     <div class="skill-card-main">  
                         <div class="skill-icon-box">  
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>  
                         </div>  
                         <div>
-                            <div class="skill-name">Data Structures</div>  
+                            <div class="skill-name">Core AI Concepts</div>  
                             <div class="skill-level">  
                                 Intermediate  
                                 <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"></polyline></svg>  
@@ -654,13 +772,23 @@
                     </div>  
                     <div class="skill-details-dropdown">  
                         <ul class="sub-skills-list">  
-                            <li class="sub-skill-tag">Arrays</li>  
-                            <li class="sub-skill-tag">Trees</li>  
-                            <li class="sub-skill-tag">Algorithms</li>  
+                            <li class="sub-skill-tag">  
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 1 8 8c0 2.2-.9 4.2-2.3 5.6L16 17.5V22h-8v-4.5l-1.7-1.9A8 8 0 0 1 12 2z"></path><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>  
+                                <span>AI</span>  
+                            </li>  
+                            <li class="sub-skill-tag">  
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>  
+                                <span>ML</span>  
+                            </li>  
+                            <li class="sub-skill-tag">  
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="2" width="8" height="6" rx="1"></rect><path d="M12 8v4"></path><path d="M8 12h8"></path><rect x="4" y="16" width="6" height="6" rx="1"></rect><rect x="14" y="16" width="6" height="6" rx="1"></rect><path d="M7 16v-4"></path><path d="M17 16v-4"></path></svg>  
+                                <span>Algorithms</span>  
+                            </li>  
                         </ul>  
                     </div>  
                 </div>  
 
+                <!-- Skill Card 3 -->
                 <div class="glass-panel skill-card" onclick="toggleSkill(this)">  
                     <div class="skill-card-main">  
                         <div class="skill-icon-box">  
@@ -676,20 +804,26 @@
                     </div>  
                     <div class="skill-details-dropdown">  
                         <ul class="sub-skills-list">  
-                            <li class="sub-skill-tag">HTML/CSS</li>  
-                            <li class="sub-skill-tag">JavaScript</li>  
-                            <li class="sub-skill-tag">React</li>  
+                            <li class="sub-skill-tag">  
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML5">  
+                                <span>HTML</span>  
+                            </li>  
+                            <li class="sub-skill-tag">  
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS3">  
+                                <span>CSS</span>  
+                            </li>  
                         </ul>  
                     </div>  
                 </div>  
 
+                <!-- Skill Card 4 -->
                 <div class="glass-panel skill-card" onclick="toggleSkill(this)">  
                     <div class="skill-card-main">  
                         <div class="skill-icon-box">  
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>  
                         </div>  
                         <div>
-                            <div class="skill-name">Databases</div>  
+                            <div class="skill-name">Database & Analytics</div>  
                             <div class="skill-level">  
                                 Backend  
                                 <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"></polyline></svg>  
@@ -698,8 +832,18 @@
                     </div>  
                     <div class="skill-details-dropdown">  
                         <ul class="sub-skills-list">  
-                            <li class="sub-skill-tag">MySQL</li>  
-                            <li class="sub-skill-tag">MongoDB</li>  
+                            <li class="sub-skill-tag">  
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" alt="PostgreSQL">  
+                                <span>PostgreSQL</span>  
+                            </li>  
+                            <li class="sub-skill-tag">  
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-6"></path></svg>  
+                                <span>Power BI</span>  
+                            </li>  
+                            <li class="sub-skill-tag">  
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>  
+                                <span>Excel</span>  
+                            </li>  
                         </ul>  
                     </div>  
                 </div>  
@@ -708,7 +852,7 @@
 
     </main>  
 
-    <!-- Floating Bottom Nav (3 tabs now since links moved to profile) -->  
+    <!-- Floating Bottom Nav (3 tabs) -->  
     <div class="bottom-nav-container">  
         <nav class="bottom-nav">  
             <button class="nav-item active" onclick="switchTab('about', this)">
@@ -761,7 +905,6 @@
         
         btnElement.classList.add('active');  
         
-        // Scroll adjustment to avoid clipping with sticky top nav on mobile
         window.scrollTo({ top: 0, behavior: 'smooth' });  
     }  
 
@@ -793,7 +936,7 @@
         const html = document.documentElement;  
         const themeIcon = document.getElementById('theme-icon');
         const currentTheme = html.getAttribute('data-theme');  
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';  
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';  
         
         html.setAttribute('data-theme', newTheme);  
 
@@ -945,7 +1088,7 @@
         currentParallax.x += (targetParallax.x - currentParallax.x) * 0.1;
         currentParallax.y += (targetParallax.y - currentParallax.y) * 0.1;
 
-        // Position AI Lens at Top Left Corner (0.1, 0.1) 
+        // Position AI Lens at Top Left Corner
         let cX = canvas.width * 0.1 + currentParallax.x * 0.5;
         let cY = canvas.height * 0.1 + currentParallax.y * 0.5;
         let baseR = Math.max(canvas.width, canvas.height) * 0.2;
