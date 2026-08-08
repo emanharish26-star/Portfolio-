@@ -45,7 +45,7 @@
         canvas { display: block; width: 100%; height: 100%; opacity: 0.4; }  
 
         /* ======================================================== */
-        /* --- PRO-LEVEL CYBERNETIC GRAPHIC INTRO TRANSITION ---     */
+        /* --- PRO CYBERNETIC GRAPHIC INTRO TRANSITION ---     */
         /* ======================================================== */
         #intro-screen {  
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;  
@@ -61,7 +61,6 @@
             pointer-events: none; 
         }  
 
-        /* Multi-layered Pro SVG Cybernetic Hub Graphic */
         .intro-graphic-stage {
             position: absolute;
             width: 480px;
@@ -79,7 +78,7 @@
             animation: ringSpin 20s linear infinite;
         }
 
-        .cyber-ring-1 { width: 440px; height: 440px; animation-direction: normal; border-color: rgba(56, 189, 248, 0.2); }
+        .cyber-ring-1 { width: 440px; height: 440px; border-color: rgba(56, 189, 248, 0.2); }
         .cyber-ring-2 { width: 360px; height: 360px; animation-direction: reverse; animation-duration: 15s; border: 2px solid rgba(99, 102, 241, 0.25); border-left-color: transparent; border-right-color: transparent; }
         .cyber-ring-3 { width: 280px; height: 280px; animation-duration: 10s; border: 1.5px solid rgba(56, 189, 248, 0.4); border-top-color: transparent; }
 
@@ -88,7 +87,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Pulsing Holographic Core Ring */
         .cyber-core-pulse {
             position: absolute;
             width: 200px;
@@ -101,17 +99,15 @@
 
         @keyframes corePulse {
             0%, 100% { transform: scale(0.9); opacity: 0.6; }
-            50% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 30px rgba(56, 189, 248, 0.3); }
+            50% { transform: scale(1.15); opacity: 1; }
         }
 
-        /* Orbiting Micro Nodes */
         .orbit-node {
             position: absolute;
             width: 8px;
             height: 8px;
             background: #38bdf8;
             border-radius: 50%;
-            box-shadow: 0 0 10px #38bdf8;
         }
         .node-1 { animation: orbit1 6s linear infinite; }
         .node-2 { animation: orbit2 4s linear infinite reverse; }
@@ -189,24 +185,55 @@
             color: var(--accent-blue);  
             background: rgba(56, 189, 248, 0.05); 
             border: 1px solid var(--border-color);
-            padding: 5px 14px; 
+            padding: 5px 16px; 
             border-radius: 12px; 
             display: inline-flex; 
             align-items: center; 
+            gap: 6px;
             margin-top: 6px;  
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden; 
         }
 
+        .role-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.4), transparent);
+            transform: skewX(-25deg);
+            animation: badgeScanline 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes badgeScanline {
+            0% { left: -150%; }
+            50% { left: 200%; }
+            100% { left: 200%; }
+        }
+
+        .role-badge-dot {
+            width: 5px;
+            height: 5px;
+            background-color: var(--accent-blue);
+            border-radius: 50%;
+            animation: pulseDot 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulseDot {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
         .role-badge:hover {
             transform: translateY(-2px);
             border-color: var(--accent-blue);
-            background: rgba(56, 189, 248, 0.1);
+            background: rgba(56, 189, 248, 0.12);
             color: #ffffff;
         }
 
-        /* EXACT REFERENCE ROTATING GRADIENT BORDER RESUME BUTTON */
         .resume-btn {
             position: relative !important;
             display: inline-flex !important; 
@@ -396,7 +423,7 @@
         .card { padding: 26px; margin-bottom: 20px; position: relative; overflow: hidden; }  
 
         /* ======================================================== */
-        /* --- 3D CARD & NEURAL CORE HUD ---                        */
+        /* --- 3D CARD & GRAPHICAL DOMAIN MATRIX HUD ---            */
         /* ======================================================== */
         
         .interactive-tilt-card {
@@ -538,6 +565,7 @@
             line-height: 1.6;
         }
 
+        /* --- ENHANCED GRAPHICAL DOMAIN MATRIX HUD --- */
         .neural-core-card {
             margin-top: 20px;
             background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.98));
@@ -555,7 +583,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
 
         .neural-title-group {
@@ -569,6 +597,12 @@
             height: 8px;
             background-color: #38bdf8;
             border-radius: 50%;
+            animation: pulse-dot-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot-glow {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.4); opacity: 0.5; }
         }
 
         .neural-title-text {
@@ -589,6 +623,73 @@
             border-radius: 8px;
             border: 1px solid var(--border-color);
             letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .matrix-sync-icon {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: syncBlink 1s infinite alternate;
+        }
+
+        @keyframes syncBlink {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        /* Graphical Radar Node Visualization Bar */
+        .domain-radar-graphic {
+            width: 100%;
+            height: 48px;
+            background: rgba(2, 6, 23, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin-bottom: 18px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .radar-scan-sweep {
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.15), transparent);
+            animation: radarSweep 3s linear infinite;
+        }
+
+        @keyframes radarSweep {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .radar-node-point {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            z-index: 2;
+        }
+
+        .radar-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+        }
+
+        .radar-label {
+            font-size: 0.55rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
         .capability-bars-container {
@@ -635,6 +736,7 @@
             position: relative;
             transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        /* ======================================================== */
 
         .text-content { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; line-height: 1.65; }  
 
@@ -835,7 +937,10 @@
             </div>
             <div class="profile-info">  
                 <h2>Eman harish E</h2>  
-                <span class="role-badge">AI & DS Developer</span>  
+                <span class="role-badge">
+                    <span class="role-badge-dot"></span>
+                    AI & DS Developer
+                </span>  
             </div>  
             <button class="expand-btn" id="expand-btn" aria-label="Expand Profile">  
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">  
@@ -881,7 +986,6 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                     </a>
                 </div>
-                <!-- EXACT REFERENCE ROTATING GRADIENT BORDER RESUME BUTTON -->
                 <a href="#" download class="resume-btn">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                     <span>Resume</span>
@@ -946,8 +1050,32 @@
                                 <span class="neural-pulse-dot"></span>
                                 <span class="neural-title-text">Domain Matrix</span>
                             </div>
-                            <span class="neural-mode-badge">AI/DS + HW SYNC</span>
+                            <span class="neural-mode-badge">
+                                <span class="matrix-sync-icon"></span>
+                                AI/DS + HW SYNC
+                            </span>
                         </div>
+                        
+                        <div class="domain-radar-graphic">
+                            <div class="radar-scan-sweep"></div>
+                            <div class="radar-node-point">
+                                <span class="radar-dot"></span>
+                                <span class="radar-label">AI/ML</span>
+                            </div>
+                            <div class="radar-node-point">
+                                <span class="radar-dot"></span>
+                                <span class="radar-label">CV/Data</span>
+                            </div>
+                            <div class="radar-node-point">
+                                <span class="radar-dot"></span>
+                                <span class="radar-label">IoT/HW</span>
+                            </div>
+                            <div class="radar-node-point">
+                                <span class="radar-dot"></span>
+                                <span class="radar-label">Software</span>
+                            </div>
+                        </div>
+
                         <div class="capability-bars-container">
                             <div class="capability-row">
                                 <div class="capability-info">
@@ -993,11 +1121,21 @@
 
         <section id="academic" class="section">  
             <h3 class="section-header">Education</h3>  
-            <div class="glass-panel card">  
+            <!-- College Details -->
+            <div class="glass-panel card" style="margin-bottom: 20px;">  
                 <h4 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; color: var(--text-main);">B.Tech AI & Data Science <span style="font-weight: 500; font-size: 0.95rem; color: var(--text-muted)">(3rd Year)</span></h4>  
                 <span style="font-size: 0.8rem; color: var(--accent-blue); font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">J.P. College of Engineering</span>  
                 <p class="text-content" style="margin-top: 14px;">  
                     <strong>Relevant Coursework:</strong> Python, Data Structures, Data Visualization, Digital Principles, Computer Organization, Design and Analysis of Algorithms, Machine Learning, Artificial Intelligence, Fundamentals of Data Science, Database Management Systems.  
+                </p>  
+            </div>  
+
+            <!-- Schooling Details Added Below College -->
+            <div class="glass-panel card">  
+                <h4 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; color: var(--text-main);">Higher Secondary & Secondary Schooling</h4>  
+                <span style="font-size: 0.8rem; color: var(--accent-blue); font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">School Education</span>  
+                <p class="text-content" style="margin-top: 14px;">  
+                    Completed foundational education with strong academic focus on mathematics, computer fundamentals, and analytical problem solving, building a solid base for advanced technical studies in engineering.  
                 </p>  
             </div>  
         </section>  
@@ -1093,6 +1231,10 @@
                             <li class="sub-skill-tag">  
                                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS3">  
                                 <span>CSS</span>  
+                            </li>  
+                            <li class="sub-skill-tag">  
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript">  
+                                <span>JavaScript</span>  
                             </li>  
                         </ul>  
                     </div>  
