@@ -594,52 +594,73 @@
             letter-spacing: 0.5px;
         }
 
-        .metrics-bars-grid {
+        /* --- TECH GRAPHICS (REPLACED ATTACHMENT AREA) --- */
+        .tech-graphics-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            align-items: flex-end;
-            height: 48px;
-            padding-top: 4px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            margin-top: 16px;
         }
 
-        .metric-col {
+        .tech-graphic-node {
+            background: linear-gradient(135deg, rgba(11, 17, 32, 0.85), rgba(2, 6, 23, 0.95));
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 14px;
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .tech-graphic-node:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.98));
+            box-shadow: 0 12px 30px rgba(56, 189, 248, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+
+        .tech-graphic-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-blue);
+            flex-shrink: 0;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+        }
+
+        .tech-graphic-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .tech-graphic-info {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            height: 100%;
-            justify-content: flex-end;
+            gap: 3px;
         }
 
-        .metric-bar-wrapper {
-            width: 100%;
-            height: 32px;
-            background: rgba(15, 23, 42, 0.8);
-            border-radius: 8px;
-            overflow: hidden;
-            display: flex;
-            align-items: flex-end;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6);
+        .tech-graphic-title {
+            font-size: 0.78rem;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: 0.3px;
         }
 
-        .metric-bar-fill {
-            width: 100%;
-            background: linear-gradient(to top, #0284c7, #38bdf8, #7dd3fc);
-            border-radius: 6px;
-            animation: bar-fluctuation 2s ease-in-out infinite alternate;
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.8);
-        }
-
-        .metric-col:nth-child(1) .metric-bar-fill { height: 80%; animation-delay: 0.1s; }
-        .metric-col:nth-child(2) .metric-bar-fill { height: 95%; animation-delay: 0.3s; }
-        .metric-col:nth-child(3) .metric-bar-fill { height: 70%; animation-delay: 0.2s; }
-        .metric-col:nth-child(4) .metric-bar-fill { height: 90%; animation-delay: 0.5s; }
-
-        @keyframes bar-fluctuation {
-            0% { transform: scaleY(0.65); filter: brightness(0.9); }
-            100% { transform: scaleY(1.08); filter: brightness(1.4); }
+        .tech-graphic-subtitle {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            font-family: monospace;
+            letter-spacing: 0.5px;
         }
 
         .metric-label {
@@ -648,6 +669,8 @@
             color: #cbd5e1;
             text-transform: uppercase;
             letter-spacing: 0.8px;
+            text-align: center;
+            margin-top: 6px;
         }
         /* ======================================================== */
 
@@ -714,7 +737,7 @@
         .sub-skills-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; list-style: none; }  
         .sub-skill-tag {  
             display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
-            width: 72px; height: 72px; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color);  
+            width: 72px; height: 72px; background: rgba(255, 255, 252, 0.02); border: 1px solid var(--border-color);  
             border-radius: 18px; transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             cursor: pointer;
         }  
@@ -964,30 +987,44 @@
                             </div>
                             <div class="metrics-cpu-load">SYS_LOAD: 98.4%</div>
                         </div>
-                        <div class="metrics-bars-grid">
-                            <div class="metric-col">
-                                <div class="metric-bar-wrapper">
-                                    <div class="metric-bar-fill"></div>
+                        
+                        <!-- REPLACED METRIC BUTTONS WITH HIGH-TECH GRAPHICS NODES -->
+                        <div class="tech-graphics-grid">
+                            <div class="tech-graphic-node">
+                                <div class="tech-graphic-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg>
                                 </div>
-                                <span class="metric-label">AI/ML</span>
+                                <div class="tech-graphic-info">
+                                    <span class="tech-graphic-title">AI / ML Engine</span>
+                                    <span class="tech-graphic-subtitle">STATUS: OPTIMAL</span>
+                                </div>
                             </div>
-                            <div class="metric-col">
-                                <div class="metric-bar-wrapper">
-                                    <div class="metric-bar-fill"></div>
+                            <div class="tech-graphic-node">
+                                <div class="tech-graphic-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
                                 </div>
-                                <span class="metric-label">IoT</span>
+                                <div class="tech-graphic-info">
+                                    <span class="tech-graphic-title">IoT & Hardware</span>
+                                    <span class="tech-graphic-subtitle">LINK: SECURE</span>
+                                </div>
                             </div>
-                            <div class="metric-col">
-                                <div class="metric-bar-wrapper">
-                                    <div class="metric-bar-fill"></div>
+                            <div class="tech-graphic-node">
+                                <div class="tech-graphic-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                                 </div>
-                                <span class="metric-label">Vision</span>
+                                <div class="tech-graphic-info">
+                                    <span class="tech-graphic-title">Vision Stream</span>
+                                    <span class="tech-graphic-subtitle">FPS: 60.0 STABLE</span>
+                                </div>
                             </div>
-                            <div class="metric-col">
-                                <div class="metric-bar-wrapper">
-                                    <div class="metric-bar-fill"></div>
+                            <div class="tech-graphic-node">
+                                <div class="tech-graphic-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
                                 </div>
-                                <span class="metric-label">Data</span>
+                                <div class="tech-graphic-info">
+                                    <span class="tech-graphic-title">Data Pipeline</span>
+                                    <span class="tech-graphic-subtitle">THROUGHPUT: HIGH</span>
+                                </div>
                             </div>
                         </div>
                     </div>
