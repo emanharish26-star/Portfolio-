@@ -185,7 +185,6 @@
             max-height: 1000px; opacity: 1; margin-top: 24px; 
         }  
 
-        /* CLEAN BALANCED VERTICAL STATS ROW */
         .stats-row {
             display: flex;
             align-items: stretch;
@@ -339,14 +338,49 @@
         .explore-work-btn.active { background: rgba(56, 189, 248, 0.1); border-color: var(--accent-cyan); box-shadow: 0 0 25px rgba(34, 211, 238, 0.4); }
         .explore-work-btn.active svg { transform: rotate(180deg); color: var(--accent-cyan); }
 
-        .work-showcase-dropdown { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.35s var(--smooth-curve), opacity 0.25s ease, margin-top 0.35s ease; }
-        .work-showcase-dropdown.open { max-height: 2800px; opacity: 1; margin-top: 24px; padding-top: 10px; border-top: 1px dashed rgba(56, 189, 248, 0.3); }
+        /* FAST & SMOOTH STAGGERED REVEAL & DISAPPEAR ANIMATION */
+        .work-showcase-dropdown { 
+            max-height: 0; 
+            opacity: 0; 
+            overflow: hidden; 
+            transition: max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease, margin-top 0.25s ease; 
+        }
+        
+        .work-showcase-dropdown.open { 
+            max-height: 3000px; 
+            opacity: 1; 
+            margin-top: 24px; 
+            padding-top: 10px; 
+            border-top: 1px dashed rgba(56, 189, 248, 0.3); 
+        }
 
         .showcase-item {
             padding: 16px 0;
             border-bottom: 1px solid rgba(56, 189, 248, 0.1);
-            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.15s ease, transform 0.15s ease, padding-left 0.3s ease;
         }
+        
+        /* When opening: smooth cascade entry */
+        .work-showcase-dropdown.open .showcase-item {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .work-showcase-dropdown.open .showcase-item:nth-child(1) { transition-delay: 0.03s; }
+        .work-showcase-dropdown.open .showcase-item:nth-child(2) { transition-delay: 0.06s; }
+        .work-showcase-dropdown.open .showcase-item:nth-child(3) { transition-delay: 0.09s; }
+        .work-showcase-dropdown.open .showcase-item:nth-child(4) { transition-delay: 0.12s; }
+        .work-showcase-dropdown.open .showcase-item:nth-child(5) { transition-delay: 0.15s; }
+        .work-showcase-dropdown.open .showcase-item:nth-child(6) { transition-delay: 0.18s; }
+
+        /* When closing: instant fast fade-out backwards */
+        .work-showcase-dropdown:not(.open) .showcase-item {
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 0.1s ease, transform 0.1s ease;
+        }
+
         .showcase-item:last-child { border-bottom: none; }
         .showcase-item:hover { padding-left: 6px; }
         .showcase-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 4px; flex-wrap: wrap; gap: 8px; }
@@ -525,7 +559,6 @@
         <div class="profile-details" id="profile-details">  
             <div style="height: 1px; background: rgba(56, 189, 248, 0.25); margin: 20px 0;"></div>  
               
-            <!-- BALANCED VERTICAL STATS ROW -->
             <div class="stats-row">  
                 <div class="stat-item">
                     <div class="stat-icon-wrapper">
@@ -871,7 +904,7 @@
 <div class="bottom-nav-container">  
     <nav class="bottom-nav">  
         <button class="nav-item active" onclick="switchTab('about', this)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
             <span>About</span>
         </button>  
         <button class="nav-item" onclick="switchTab('academic', this)">
