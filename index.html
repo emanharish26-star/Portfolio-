@@ -300,7 +300,8 @@
         .explore-work-btn.active svg { transform: rotate(180deg); color: var(--accent-cyan); }
 
         .work-showcase-dropdown { max-height: 0; opacity: 0; overflow: hidden; transition: all 0.6s var(--smooth-curve); }
-        .work-showcase-dropdown.open { max-height: 1200px; opacity: 1; margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--border-color); }
+        /* INCREASED MAX HEIGHT AND ADDED PADDING TO PREVENT BOTTOM CLIPPING ON MOBILE */
+        .work-showcase-dropdown.open { max-height: 2800px; opacity: 1; margin-top: 16px; padding-top: 16px; padding-bottom: 8px; border-top: 1px dashed var(--border-color); }
 
         .showcase-item {
             background: linear-gradient(145deg, rgba(3, 7, 18, 0.9), rgba(15, 23, 42, 0.95)); border: 1px solid var(--border-color); border-radius: 14px; padding: 16px; margin-bottom: 12px;
