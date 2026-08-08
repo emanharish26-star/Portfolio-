@@ -159,14 +159,18 @@
             border-radius: 50%; box-shadow: 0 0 6px var(--accent-blue);
         }
 
+        /* UPDATED RESUME BUTTON CSS */
         .resume-btn {
             position: relative !important; display: inline-flex !important; 
             align-items: center !important; justify-content: center !important; gap: 8px !important;
             padding: 10px 22px !important; color: var(--text-main) !important;
             border-radius: 50px !important; font-size: 0.8rem !important; font-weight: 800 !important;
-            text-decoration: none !important; cursor: pointer !important; background: #080d1a !important;
+            text-decoration: none !important; cursor: pointer !important; 
+            background: transparent !important; 
             border: none !important; overflow: hidden !important; z-index: 1 !important;
             box-shadow: 0 4px 15px rgba(0,0,0,0.4) !important;
+            -webkit-mask-image: -webkit-radial-gradient(white, black); 
+            isolation: isolate !important; 
             transition: transform 0.4s var(--smooth-curve), box-shadow 0.4s var(--smooth-curve) !important;
         }
         .resume-btn:hover { transform: translateY(-2px) scale(1.02) !important; box-shadow: 0 8px 20px rgba(56, 189, 248, 0.15) !important; }
